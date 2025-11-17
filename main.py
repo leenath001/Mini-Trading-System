@@ -23,7 +23,8 @@ def on_FIX(msg):
         pos.update(order.symbol)
         print(f"Position for {order.symbol}: {pos.position_size}")
 
-    SystemLog().update(order)
+    log = SystemLog()
+    log.update(order)
 
 def main():
     print("FIX Stream started. Processing messages.")
