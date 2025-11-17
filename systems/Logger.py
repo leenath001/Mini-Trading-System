@@ -1,8 +1,7 @@
 ##  Class tracks and logs state of system and specific ticker position sizes
 #   
 
-from Order_Sim import Order
-from Risk_Eng import RiskEngine
+from systems.Order_Sim import Order
 
 class SystemLog:
     _instance = None
@@ -22,16 +21,19 @@ class SystemLog:
 class PositionLog:
     _instances = {}
 
-    def __new__(cls,ticker):
+    def __new__(cls, ticker):
         if ticker not in cls._instances:
             instance = super().__new__(cls)
             cls._instances[ticker] = instance
-            return cls._instances[ticker]
-        
-    def __init__(self,ticker):
+        return cls._instances[ticker]  
+
+    def __init__(self, ticker):
+        if getattr(self, "_initialized", False):
+            return
         self.ticker = ticker
         self.position_size = 0
         self.orders = []
+        self._initialized = True
 
     def update(self,ord: Order):
         self.orders.append(ord)
