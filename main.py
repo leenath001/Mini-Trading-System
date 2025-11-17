@@ -26,8 +26,8 @@ def on_FIX(msg):
     SystemLog().update(order)
 
 def main():
-    start_FIX_Stream(2, on_FIX)
     print("FIX Stream started. Processing messages.")
+    start_FIX_Stream(2, on_FIX)
 
     while True:
         time.sleep(1)

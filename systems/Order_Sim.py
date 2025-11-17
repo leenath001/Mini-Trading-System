@@ -28,3 +28,6 @@ class Order():
         else:
             st = f"Invalid State."
         return st
+    
+    def __repr__(self):
+        return f"Order(symbol={self.symbol!r}, side={self.side!r}, qty={self.qty})"
